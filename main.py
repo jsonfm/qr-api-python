@@ -8,8 +8,12 @@ from app.utils.qr import generate_qr, decode_qr_image
 from app.schemas.encode import EncodeSchema, EncodeResponse
 from app.schemas.decode import DecodeSchema, DecodeResponse
 
+# middlewares
+from app.middlewares.cors import apply_cors_middleware
+
 
 app = FastAPI(title="QR encoder/decoder API.", description="Generates base64 QR images and decodes base64 images as strings.")
+app = apply_cors_middleware(app)
 
 
 @app.post("/encode", tags=["QR"], description="Generate a QR Image.", response_model=EncodeResponse)
